@@ -1,0 +1,57 @@
+name: Speech loop tests
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: speechloop-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  core:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - run: sudo apt-get update && sudo apt-get install -y espeak-ng libsndfile1
+      - run: python -m pip install 'torch>=2.6,<3' --index-url https://download.pytorch.org/whl/cpu
+      - run: python -m pip install -e '.[test]'
+      - run: python -m pytest -q --junitxml=reports/junit.xml
+      - run: python scripts/smoke_train.py --engine espeak --steps 500 --output runs/ci_espeak
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: core-test-results
+          path: |
+            reports/junit.xml
+            runs/ci_espeak/result.json
+  paradee:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - run: sudo apt-get update && sudo apt-get install -y espeak-ng libsndfile1
+      - run: python -m pip install 'torch>=2.6,<3' --index-url https://download.pytorch.org/whl/cpu
+      - run: python -m pip install -e '.[test,paradee]'
+      - run: python -m spacy download en_core_web_sm
+      - run: python -m speechloop test-paradee --output runs/paradee_integration
+      - run: python scripts/smoke_train.py --engine paradee --steps 800 --output runs/ci_paradee
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: paradee-integration-results
+          path: |
+            runs/paradee_integration/
+            runs/ci_paradee/result.json
+            runs/ci_paradee/train/training_report.json

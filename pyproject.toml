@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "speechlooplab"
+version = "0.1.0"
+description = "Tiny CPU speech-recognition research using a frozen Paradee speech generator and adaptive synthetic data."
+requires-python = ">=3.10"
+dependencies = ["torch>=2.6,<3", "numpy>=1.26,<3", "scipy>=1.11,<2", "soundfile>=0.12,<1"]
+
+[project.optional-dependencies]
+test = ["pytest>=8,<10"]
+paradee = ["paradee @ git+https://github.com/sahilmahendrakar/paradee.git@9c8b4d7504cbee7e64de2d0341bb690f0b0ab708"]
+
+[project.scripts]
+speechloop = "speechloop.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["speechloop*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+markers = ["integration: runs actual local speech synthesis and optimization", "paradee: requires the Paradee model and its dependencies"]

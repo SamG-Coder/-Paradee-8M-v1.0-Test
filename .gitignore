@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+runs/
+models/
+*.egg-info/
+*.wav
+*.pt
+sources/
+.coverage
+htmlcov/
+reports/junit.xml

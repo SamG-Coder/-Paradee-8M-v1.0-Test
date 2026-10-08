@@ -1,0 +1,122 @@
+{
+  "status": "passed",
+  "engine": {
+    "engine": "espeak",
+    "voice": "en-us",
+    "version": "eSpeak text-to-speech: 1.48.15  16.Apr.15  Data at: /usr/lib/x86_64-linux-gnu/espeak-data"
+  },
+  "train_examples": 8,
+  "steps": 350,
+  "seconds": 7.171793159999879,
+  "initial_train_cer": 2.032258064516129,
+  "final_train_cer": 0.03225806451612903,
+  "final_train_wer": 0.125,
+  "final_train_exact_match": 0.875,
+  "same_words_changed_speed": {
+    "samples": 8,
+    "word_errors": 5,
+    "reference_words": 8,
+    "wer": 0.625,
+    "char_errors": 9,
+    "reference_chars": 31,
+    "cer": 0.2903225806451613,
+    "exact_match": 0.375,
+    "seconds": 0.0081377409999277,
+    "predictions": [
+      {
+        "id": "speed-0",
+        "reference": "red",
+        "prediction": "red"
+      },
+      {
+        "id": "speed-1",
+        "reference": "blue",
+        "prediction": "blue"
+      },
+      {
+        "id": "speed-2",
+        "reference": "green",
+        "prediction": "gred"
+      },
+      {
+        "id": "speed-3",
+        "reference": "cat",
+        "prediction": "ct"
+      },
+      {
+        "id": "speed-4",
+        "reference": "dog",
+        "prediction": "doug"
+      },
+      {
+        "id": "speed-5",
+        "reference": "bird",
+        "prediction": "bird"
+      },
+      {
+        "id": "speed-6",
+        "reference": "left",
+        "prediction": "ld"
+      },
+      {
+        "id": "speed-7",
+        "reference": "right",
+        "prediction": "riet"
+      }
+    ],
+    "engines": [
+      "espeak"
+    ]
+  },
+  "train_predictions": [
+    {
+      "id": "ca70871f71e8f824340949b7",
+      "reference": "red",
+      "prediction": "red"
+    },
+    {
+      "id": "1157e08b70d92a1ce3690513",
+      "reference": "blue",
+      "prediction": "blue"
+    },
+    {
+      "id": "33d12b8c3f29f543c10785d5",
+      "reference": "green",
+      "prediction": "gren"
+    },
+    {
+      "id": "ac565ab9b6eb8d8772655df3",
+      "reference": "cat",
+      "prediction": "cat"
+    },
+    {
+      "id": "2ca19a7293f65dfc411595e4",
+      "reference": "dog",
+      "prediction": "dog"
+    },
+    {
+      "id": "a352cedcd7333b28853bf3f3",
+      "reference": "bird",
+      "prediction": "bird"
+    },
+    {
+      "id": "d179e5f9fc5b66411c146f8f",
+      "reference": "left",
+      "prediction": "left"
+    },
+    {
+      "id": "6de13f98cb31a502325248a1",
+      "reference": "right",
+      "prediction": "right"
+    }
+  ],
+  "checkpoint_reload_identical": true,
+  "resume_total_steps": 352,
+  "parameters": 57261,
+  "inference_checkpoint_bytes": 234993,
+  "scope": "Eight-word training-set overfit and speed diagnostic. NOT held-out-text or human-speech accuracy.",
+  "paradee_executed": false,
+  "python": "3.13.5",
+  "torch": "2.10.0+cpu",
+  "threads": 2
+}
